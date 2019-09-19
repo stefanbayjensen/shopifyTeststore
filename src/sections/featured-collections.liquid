@@ -1,0 +1,81 @@
+<section class="row row-featued-collections featured-collections container">
+    <ul class="featured-collections__wrapper">
+        {% for block in section.blocks %}
+            {% assign b = block.settings %}
+            {% assign c = collections[b.collection] %}
+            {% if b.image != blank %}
+                {% assign image = b.image %}
+            {% else %}
+                {% assign image = c.image %}
+            {% endif %}
+            <li class="featured-collections__item">
+                <div class="featured-collections__item__img">
+                    {%
+                        include 'image' with
+                        img: image,
+                        sizing: '1000'
+                    %}
+                </div>
+                <div class="featured-collections__item__inner">
+                    <h4 class="title">{{ b.title }}</h4>
+                    {{ b.description }}
+                    <a href="{{ c.url }}" class="btn">{{ b.cta }}</a>
+                </div>
+                <a href="{{ c.url }}" class="featured-collections__item__link"></a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% schema %}
+    {
+        "name": "Featured collections",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Collection",
+                "type": "collection",
+                "settings": [
+                    {
+                        "type": "collection",
+                        "id": "collection",
+                        "label": "Choose a collection"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Choose an image",
+                        "info": "Use this, if you want to override the collection image" 
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description",
+                        "label": "Description"
+                    },
+                    {
+                        "type": "text",
+                        "id": "cta",
+                        "label": "Text for button"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Featured collections",
+                "category": "Layout"
+            }
+        ]
+    }
+{% endschema %}

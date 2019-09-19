@@ -1,0 +1,13 @@
+{%- assign product = product.selected_or_first_available_variant -%}
+{%- assign data-object = false -%}
+{% if data != blank %}
+    {%- assign data-object = true -%}
+{% endif %}
+    
+{% if product.compare_at_price > product.price %}
+    <p class="price--old"{% if data-object %} data-price{% endif %}>{{ product.compare_at_price | money }}</p>
+    <p class="price"{% if data-object %} data-compare-price{% endif %}>{{ product.price | money }}</p>
+{% else %}
+    <p class="price"{% if data-object %} data-price{% endif %}>{{ product.price | money }}</p>
+    <p class="price"{% if data-object %} data-compare-price{% endif %}></p>
+{% endif %}

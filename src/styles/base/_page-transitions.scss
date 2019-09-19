@@ -1,0 +1,23 @@
+.site-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background: $white;
+
+    z-index: 99999;
+    opacity: 0;
+
+    transition: .3s ease all;
+    transition-property: opacity;
+
+    pointer-events: none;
+
+    .is-transitioning &{
+        opacity: 1;
+    }
+}
+
+/* Go to scripts/router.js for changing the timeouts */

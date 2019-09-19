@@ -1,0 +1,112 @@
+{%- assign s = section.settings -%}
+<form action="/cart" method="post">
+    <section class="cart-page container container--small">
+        {% if cart.item_count > 0 %}
+            <main class="cart-page__list">
+                <h1>{{ 'cart.general.title' | t }}</h1>
+                <ul class="cart-page__list__header">
+                    <li class="cart-page__list__header__product">{{ 'cart.label.product' | t }}</li>
+                    <li class="cart-page__list__header__quantity">{{ 'cart.label.quantity' | t }}</li>
+                    <li class="cart-page__list__header__price">{{ 'cart.label.price' | t }}</li>
+                </ul>
+                <ul class="cart-page__list__wrapper">
+                    {% for i in cart.items %}
+                        <li class="cart-page__list__item">
+                            <a href="{{ i.url }}" class="cart-page__list__item__link"></a>
+                            <div class="cart-page__list__item__img">
+                                {%
+                                    include 'image' with
+                                    img: i.image,
+                                    sizing: '320'
+                                %}
+                            </div>
+                            <div class="cart-page__list__item__info">
+                                <p class="cart-page__list__item__title">{{ i.product.title }}</p>
+                                {% unless i.product.has_only_default_variant %}
+                                    <p class="cart-page__list__item__variant">{{ i.variant.title }}</p>
+                                {% endunless %}
+                                <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-page__list__item__remove">{{ 'cart.general.remove' | t }}</a>
+                            </div>
+                            <div class="cart-page__list__item__quantity">
+                                <div class="quantity">
+                                    <a href="/cart/change?line={{ forloop.index }}&quantity={{ i.quantity | minus: 1 }}" class="quantity__control quantity__control--remove">–</a>
+                                    <p class="quantity__default">{{ i.quantity }}</p>
+                                    <a href="/cart/change?line={{ forloop.index }}&quantity={{ i.quantity | plus: 1 }}" class="quantity__control quantity__control--add">+</a>
+                                </div>
+                            </div>
+                            <div class="cart-page__list__item__price">
+                                <p class="price">{{ i.final_line_price | money }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </main>
+            <aside class="cart-page__total">
+                <div class="cart-page__total__inner">
+                    <h2 class="cart-page__total__title">{{ 'cart.general.subtotal' | t }}</h2>
+                    <ul class="cart-page__total__list">
+                        <li class="cart-page__total__item"><span>{{ 'cart.label.subtotal' | t }}</span>{{ cart.total_price | money }}</li>
+                        <li class="cart-page__total__item"><span>{{ 'cart.label.shipping' | t }}</span>{{ 'cart.general.shipping_at_checkout' | t }}</li>
+                        <li class="cart-page__total__item cart-page__total__item--total"><span>{{ 'cart.label.total' | t }}</span>{{ cart.total_price | money }}</li>
+                    </ul>
+                    <div class="cart-page__total__submit cart-page__total--sticky" data-component="cartValidation">
+                        {%- assign total = cart.total_price | money -%}
+                        <button class="cart-page__total__submit__btn btn btn--cta js-submit" id="checkout" name="checkout" type="submit">{{ 'cart.general.checkout' | t }}</button>
+                        <button class="cart-page__total--sticky__btn js-submit">{{ 'cart.general.pay' | t: amount: total }}</button>
+                        <label for="cartTerms" class="cart-page__total__terms">
+                            {% capture terms %}
+                                <a href="/pages/terms-and-conditions">{{ 'cart.general.terms_link' | t }}</a>
+                            {% endcapture %}
+
+                            <input type="checkbox" id="cartTerms" class="js-terms" name="cartTerms">
+                            <label for="cartTerms">{{ 'cart.general.terms_html' | t: terms: terms  }}</label>
+                        </label>
+                    </div>
+                    {% if s.payment-icons %}
+                        <div class="cart-page__total__payment">
+                            {% if s.payment-title != blank %}
+                                <p class="cart-page__total__payment__title">{{ s.payment-title }}</p>
+                            {% endif %}
+                            {% include 'payment-icons' %}
+                        </div>
+                    {% endif %}
+                </div>
+            </aside>
+        {% else %}
+            <article class="cart-page__empty">
+                <h1>{{ 'cart.general.empty' | t }}</h1>
+            </article>
+        {% endif %}
+    </section>
+    <div class="cart-page__popup js-popup">
+        <div class="cart-page__popup__overlay"></div>
+        <div class="cart-page__popup__inner">
+            {%- assign terms = 'cart.general.terms_link' | t -%}
+            <p class="cart-page__popup__title">{{ 'cart.general.terms_link' | t }}</p>
+            <article class="cart-page__popup__description">{{ 'cart.general.accept_terms' | t: terms: terms }}</article>
+            <div class="cart-page__popup__buttons">
+                <p class="js-cancel">{{ 'cart.general.terms_decline' | t }}</p>
+                <p class="js-accept">{{ 'cart.general.terms_accept' | t }}</p>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% schema %}
+    {
+        "name": "Cart",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "payment-icons",
+                "label": "Show payment icons?",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "payment-title",
+                "label": "Payment text"
+            }
+        ]
+    }
+{% endschema %}

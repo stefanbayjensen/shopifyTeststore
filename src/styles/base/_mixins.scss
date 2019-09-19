@@ -1,0 +1,70 @@
+@mixin object-fit($fit: cover, $position: null){
+  -o-object-fit: $fit;
+     object-fit: $fit;
+  @if $position {
+      -o-object-position: $position;
+         object-position: $position;
+      font-family: 'object-fit: #{$fit}; object-position: #{$position}';
+  } @else {
+      font-family: 'object-fit: #{$fit}';
+  }
+}
+
+@mixin mq($viewports, $constraint1: max, $constraint2: width) {
+  
+      // Set default variables
+      $min: min-#{$constraint2};
+      $max: max-#{$constraint2};
+  
+      @if( type-of( $viewports ) == number ) {
+  
+          @media screen and (#{$constraint1}-#{$constraint2}: $viewports) {
+              @content;
+          }
+  
+      // Breakpoint variable is passed
+      } @else if ( type-of( $viewports ) == string ) {
+  
+          @if ( map-has-key( $breakpoints, $viewports ) ) {
+              $breakpoint: map-get( $breakpoints, $viewports );
+  
+              @media screen and (#{$constraint1}-#{$constraint2}: $breakpoint) {
+                  @content;
+              }
+          }
+          
+      } @else {
+  
+          @media screen and ($min: nth($viewports, 1)) and ($max: nth($viewports, 2)) {
+              @content;
+          }
+  
+      }
+  
+}
+
+@mixin fill{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none; // Makes sure users cant pull the image
+
+    @include object-fit;
+}
+
+@mixin appearance($value: none){
+    -moz-appearance:$value;
+    -webkit-appearance: $value;
+    appearance: $value;
+}
+
+@mixin truncate(){
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}

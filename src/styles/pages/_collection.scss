@@ -1,0 +1,194 @@
+.collection{
+
+    &__title{
+        font-size: 2.4rem;
+        line-height: 1.2;
+
+        font-weight: 600;
+        color: $black;
+
+        width: 100%;
+        text-align: center;
+
+        padding: 15rem 0;
+    }
+
+    &__wrapper{
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__filter{
+        display: flex;
+        flex-flow: column;
+
+        width: auto;
+
+        &__title{
+            font-size: 2rem;
+            line-height: 1.5;
+            font-weight: 600;
+
+            margin-bottom: 1rem;
+        }
+
+        &__row{
+            margin-top: 3.2rem;
+            margin-right: 5rem;
+
+            width: 100%;
+            max-width: 25.5rem;
+
+            &:first-child{
+                margin-top: 0;
+            }
+        }
+
+        .category{
+
+            &__wrapper{
+                display: flex;
+                flex-flow: column;
+            }
+
+            &__item{
+                display: inline-flex;
+                align-items: center;
+
+                margin-top: 1rem;
+
+                &:first-child{
+                    margin-top:0;
+                }
+
+                .checkbox{
+                    width: 1.25em;
+                    height: 1.25em;
+
+                    border-radius: .4rem;
+                    border: 1px solid darken(#fff, 12%);
+
+                    margin: 0 .5em 0 0;
+                    display: inline-flex;
+
+                    justify-content: center;
+                    align-items: center;
+
+                    overflow: hidden;
+
+                    transition: .3s $ease all;
+                    transition-property: background, border;
+
+                    img{
+                        width: 70%;
+                        height: auto;
+
+                        opacity: 0;
+                        transform: scale(1.5);
+
+                        margin: auto;
+
+                        transition: .5s $ease all;
+                        transition-property: opacity, transform;
+                    }
+                }
+
+                &.active{
+                    .checkbox{
+                        border-color: #000;
+                        background: $black;
+
+                        img{
+                            transform: scale(1);
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        .colors{
+            display: flex;
+            flex-flow: column;
+
+            &__wrapper{
+                display: flex;
+                flex-flow: row wrap;
+                margin: -.5rem;
+            }
+
+            &__item{
+                font-size: 0;
+                width: 4rem;
+                height: 4rem;
+
+                border-radius: 50%;
+                margin: .5rem;
+
+                cursor: pointer;
+
+                display: flex;
+                position: relative;
+                z-index: 1;
+
+                overflow: hidden;
+
+                &.active{
+                    img{
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+
+                    &:before{
+                        opacity: 1;
+                    }
+                }
+
+                img{
+                    margin: auto;
+                    width: 2.4rem;
+                    height: auto;
+
+                    transform: scale(.5);
+                    opacity: 0;
+
+                    transition: .3s $ease all;
+                    transition-property: transform, opacity;
+                }
+
+                &:before{
+                    content: "";
+                    position: absolute;
+
+                    top: 0;
+                    left: 0;
+
+                    width: 100%;
+                    height: 100%;
+
+                    background: linear-gradient(rgba(#000, 0), rgba(#000, .2));
+
+                    z-index: -1;
+
+                    opacity: 0;
+                    transition: .3s $ease opacity;
+                }
+            }
+        }
+    }
+
+    &__inner{
+        display: flex;
+        flex-flow: row wrap;
+        flex: 1 0;
+
+        margin: -1.5rem -1rem;
+
+        .product-item{
+            width: calc(100% / 3 - 2rem);
+            margin: 1.5rem 1rem;
+
+            animation: fadeInUp .5s both;
+        }
+    }
+}

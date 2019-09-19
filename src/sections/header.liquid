@@ -1,0 +1,143 @@
+{%- assign s = section.settings -%}
+<header class="site-header" data-component="header">
+    {% if s.topbar != blank %}
+        <header class="site-header__topbar">
+            <p>{{ s.topbar }}</p>
+        </header>
+    {% endif %}
+    <div class="container site-header__top">
+        <a href="/" class="site-header__logo">
+            {%- if s.logo != blank -%}
+                {{ s.logo | file_url | img_tag }}
+            {%- else -%}
+                {{ shop.name }}
+            {%- endif -%}
+        </a>
+        <a href="/login" class="site-header__icon">
+            {{ 'user.svg' | asset_url | img_tag }}
+            <p class="text">Log ind</p>
+        </a>
+        <a href="/cart" class="site-header__cart site-header__icon js-cart{% if cart.item_count > 0 %} site-header__cart--active{% endif %}">
+            {{ 'cart.svg' | asset_url | img_tag }}
+            <span class="js-cart-count site-header__cart__count">{{ cart.item_count }}</span>
+            <p class="text">{{ 'layout.cart.title' | t }}</p>
+        </a>
+    </div>
+    <div class="container site-header__bottom">
+        <nav class="site-header__nav">
+            {% include 'navigation' with 
+                menu: s.menu,
+                wrapperClass: 'site-header__nav__wrapper',
+                itemClass: 'site-header__nav__item'
+            %}
+        </nav>
+        <form class="site-header__search" action="/search">
+            {{ 'search.svg' | asset_url | img_tag: 'Search icon', 'icon' }}
+            <input type="text" placeholder="Search" name="q" />
+            <div class="site-header__search__overlay"></div>
+        </form>
+    </div>
+</header>
+
+{% schema %}
+    {
+        "name": "Header",
+        "settings": [
+            {
+                "type": "text",
+                "id": "logo",
+                "label": "Logo",
+                "placeholder": "logo.svg",
+                "info": "The logo is uploaded through [files](/admin/settings/files)"
+            },
+            {
+                "type": "link_list",
+                "id": "menu",
+                "label": "Menu",
+                "info": "Choose the menu, that should be in the header"
+            },
+            {
+                "type": "text",
+                "id": "topbar",
+                "label": "Text for Announcement bar",
+                "info": "Leaving this blank, will result in this not showing"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Featured product",
+                "type": "featured_product",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "menuItem",
+                        "label": "Menu item to apply",
+                        "info": "Write the title of the menu-item you want to have a megamenu",
+                        "placeholder": "Catalog"
+                    },
+                    {
+                        "type": "product",
+                        "id": "product",
+                        "label": "Choose product",
+                        "info": "Which product do you want to be featured?"
+                    }
+                ]
+            },
+            {
+                "name": "Megamenu w. 3 columns",
+                "type": "megamenu_c3",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "menuItem",
+                        "label": "Menu item to apply",
+                        "info": "Write the title of the menu-item you want to have a megamenu",
+                        "placeholder": "Catalog"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Column 1"
+                    },
+                    {
+                        "type": "text",
+                        "id": "c1_title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "c1_menu",
+                        "label": "Choose menu"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Column 2"
+                    },
+                    {
+                        "type": "text",
+                        "id": "c2_title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "c2_menu",
+                        "label": "Choose menu"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Column 3"
+                    },
+                    {
+                        "type": "text",
+                        "id": "c3_title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "c3_menu",
+                        "label": "Choose menu"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

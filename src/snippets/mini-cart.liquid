@@ -1,0 +1,15 @@
+{% if class == blank %}
+    {%- assign class = 'mini-cart' -%}
+{% endif %}
+
+<div class="{{ class }}" data-component="miniCart">
+    <div class="{{ class }}__inner js-list">
+        <ul class="{{ class }}__wrapper js-items">
+        </ul>
+        <p class="{{ class }}__total">Total <span class="js-total">{{ cart.total_price | money }}</span></p>
+        <a href="/cart" class="btn">Go to cart</a>
+    </div>
+    <div class="{{ class }}__empty js-empty">
+        {{ 'cart.general.empty' | t }}
+    </div>
+</div>

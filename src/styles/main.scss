@@ -1,0 +1,44 @@
+/*
+
+  //////////////////////////////////
+ /// UDVIKLET AF GRAFIKR APS //////
+//////////////////////////////////
+
+*/
+
+
+/*===== VENDOR =====*/
+@import 'vendor/reset';
+@import 'vendor/tiny-slider';
+@import 'vendor/animation';
+/*==================*/
+
+/*===== BASE =====*/
+@import 'base/vars';
+@import 'base/mixins';
+@import 'base/default';
+@import 'base/typography';
+@import 'base/page-transitions';
+/*================*/
+
+/*===== COMPONENTS =====*/
+@import 'components/product-item';
+@import 'components/header';
+@import 'components/payment-icons';
+@import 'components/linked-products';
+@import 'components/product-slider';
+@import 'components/hero';
+@import 'components/row';
+@import 'components/featured-collections';
+@import 'components/products';
+@import 'components/loader';
+@import 'components/recently-viewed';
+@import 'components/recommended-products';
+@import 'components/ajax-pagination';
+/*======================*/
+
+/*===== PAGES =====*/
+@import 'pages/cart';
+@import 'pages/collection';
+@import 'pages/product';
+/*=================*/

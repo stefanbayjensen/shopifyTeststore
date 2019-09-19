@@ -1,0 +1,31 @@
+<div class="product-item">
+    <div class="product-item__image">
+        {% if product.price < product.compare_at_price %}
+            <span class="product-item__splash">Tilbud</span>
+        {% endif %}
+        {% 
+            include 'image', 
+            img: product.featured_image,
+            sizing: '720'
+        %}
+        {% if product.images.size > 1 %}
+            {% 
+                include 'image', 
+                img: product.images[1],
+                sizing: '720',
+                class: 'product-item__image--hover'
+            %}
+        {% endif %}
+        <div class="product-item__hover">
+            {% include 'linked-products' %}
+        </div>
+    </div>
+    <article class="product-item__meta">
+        <small class="vendor">{{ product.vendor }}</small>
+        <h4 class="product-item__title">{{ product.title }}</h4>
+        <div class="prices">
+            {% include 'product-prices' %}
+        </div>
+    </article>
+    <a href="{{ product.url }}" class="product-item__link"></a>
+</div>

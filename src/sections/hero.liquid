@@ -1,0 +1,68 @@
+<section class="hero row row-hero hero--blocks row--no-gap">
+    {% for block in section.blocks %}
+        {% assign b = block.settings %}
+        {% assign c = collections[b.collection] %}
+        {% if b.image != blank %}
+            {% assign image = b.image %}
+        {% else %}
+            {% assign image = c.image %}
+        {% endif %}
+
+        <div class="hero--blocks__item">
+            <div class="hero--blocks__item__img">
+                {% 
+                    include 'image', 
+                    img: image,
+                    sizing: '1024'
+                %}
+            </div>
+            <div class="hero--blocks__item__inner">
+                <h2 class="title">{{ b.title }}</h2>
+                <a href="{{ c.url }}" class="btn">{{ b.cta }}</a>
+            </div>
+
+            <a href="{{ c.url }}" class="hero--blocks__item__link"></a>
+        </div>
+    {% endfor %}
+</section>
+
+{% schema %}
+{
+    "name": "Hero",
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Featured collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Choose a collection"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Choose an image",
+                    "info": "Only choose an image, if you want to override the default collection image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "cta",
+                    "label": "Text for button"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Hero",
+            "category": "hero"
+        }
+    ]
+}
+{% endschema %}

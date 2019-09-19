@@ -1,0 +1,28 @@
+//*// FONT VARIABLES //*//
+$font-family: 'Cerebri Sans';
+$font-size: var(--base-font-size);
+
+//*// COLOR VARIABLES //*//
+$accent: var(--color-primary);
+$second: var(--color-secondary);
+
+$white: var(--color-white);
+$black: var(--color-black);
+
+$font-color: var(--color-body-text);
+
+$cta: #FF4444;
+$ctaGreen: #698F56;
+
+$ease: cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+//*// BREAKPOINTS //*//
+$breakpoints: (
+    small: 512px,
+    medium: 768px,
+    large: 1024px,
+    content: 1200px,
+    laptop: 1440px,
+    desktop: 1920px,
+    retina: 2880px
+);

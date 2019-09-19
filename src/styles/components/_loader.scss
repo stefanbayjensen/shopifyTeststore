@@ -1,0 +1,40 @@
+@keyframes bouncing-loader {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+}
+
+.loader{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    margin: 20rem 0;
+
+    &__item{
+        font-size: .8rem;
+        width: 1em;
+        height: 1em;
+
+        background: $black;
+        border-radius: 50%;
+        opacity: .7;
+
+        display: block;
+
+        margin: .35em;
+
+        animation: bouncing-loader 0.6s infinite alternate;
+
+        &:nth-child(2){
+            animation-delay: .2s;
+        }
+
+        &:nth-child(3){
+            animation-delay: .4s;
+        }
+    }
+}

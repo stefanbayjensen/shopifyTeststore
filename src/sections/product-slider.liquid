@@ -1,0 +1,38 @@
+{%- assign s = section.settings -%}
+{%- assign c = collections[s.collection] -%}
+<section class="product-slider container" data-component="productSlider">
+    <button class="product-slider__nav product-slider__nav--prev js-prev">{{ 'slider-arrow.svg' | asset_url | img_tag }}</button>
+    <button class="product-slider__nav product-slider__nav--next js-next">{{ 'slider-arrow.svg' | asset_url | img_tag }}</button>
+    <div class="product-slider__slider js-slider">
+        {% for product in c.products %}
+            {% include 'product-item' %}
+        {% endfor %}
+        {% for product in c.products %}
+            {% include 'product-item' %}
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Product slider",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "collection",
+                 "id": "collection",
+                 "label": "Choose a collection"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Product slider",
+                "category": "Layout"
+            }
+        ]
+    }
+{% endschema %}

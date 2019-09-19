@@ -1,0 +1,59 @@
+<div class="product" data-component='product'>
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- assign p = product -%}
+    {% include 'product-head' %}
+    <section class="product__inner container" data-component='productSelection'>
+        <aside class="product__slider" data-component="productPageSlider">
+            <div class="product__slider__thumbs">
+                {% for i in p.images %}
+                    <div class="thumb js-thumb" data-index="{{ forloop.index0 }}">
+                        {% 
+                            include 'image' with
+                            img: i,
+                            sizing: 200
+                        %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="product__slider__wrapper">
+                <div class="product__slider__inner js-slider">
+                    {% for i in p.images %}
+                        <div class="product-image">
+                            {% 
+                                include 'image' with
+                                img: i,
+                                sizing: 1024
+                            %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </aside>
+        <section class="product__info">
+            <article class="product__info__inner">
+                <h4 class="product__vendor">{{ p.vendor }}</h4>
+                <h1 class="product__title">{{ p.title }}</h1>
+                <div class="product__prices">{% include 'product-prices' with data: true %}</div>
+                {% include 'linked-products' with product: p %}
+                
+                <form action='/cart/add' class="product__form" data-component='productForm' enctype='multipart/form-data' method='post'>
+                    {% 
+                        include 'product-options' with 
+                        type: 'radio', 
+                        class: 'product__options',
+                        product: p 
+                    %}
+                    {% include 'specs' with product: p %}
+                    <div class="quantity">{% include 'component-counter' with product: p, max: 5 %}</div>
+                    <button type="submit" class="add-to-cart">{{ 'products.product.add_to_cart' | t }}</button>
+                </form>
+            </article>
+            <aside class="product__info__sidebar">
+                {% section 'product-sidebar' %}
+            </aside>
+        </section>
+    </section>
+
+    {% section 'recommended-products' %}
+    {% section 'recently-viewed' %}
+</div>

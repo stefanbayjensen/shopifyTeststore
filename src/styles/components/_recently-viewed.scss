@@ -1,0 +1,16 @@
+.recently-viewed{
+    display: flex;
+    flex-flow: column;
+
+    &__wrapper{
+        margin: -1.5rem -1rem;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
+        .product-item{
+            width: calc(100% / 4 - 2rem);
+            margin: 1.5rem 1rem;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{% assign category = '' %}
+{% assign colors = '' %}
+{% assign hasFilter = false %}
+{% for tag in collection.all_tags %}
+    {% if tag contains 'category_' %}
+        {% assign category = category | append: tag | append: ',' %}
+        {% assign hasFilter = true %}
+    {% elsif tag contains 'color_' %}
+        {% assign colors = colors | append: tag | append: ',' %}
+        {% assign hasFilter = true %}
+    {% else %}
+        {% continue %}
+    {% endif %}
+{% endfor %}
+{% assign colors = colors | split: ',' %}
+{% assign category = category | split: ',' %}
+
+
+
+{% paginate collection.products by 12 %}
+
+    {% section 'collection-hero' %}
+
+    <div class='collection' data-collection="{{ collection.handle }}" data-component="collection">
+        <section id="collectionProducts" class="collection__wrapper container">
+            {% if hasFilter %}
+                <aside class="collection__filter">
+                    {% if colors.size > 1 %}
+                        <div class="colors js-colors collection__filter__row">
+                            <p class="collection__filter__title">Farver</p>
+                            <ul class="colors__wrapper">
+                                {% for tag in colors %}
+                                    {% if tag contains '%' %}
+                                        {% assign t = tag | remove: 'color_' | split: '%' %}
+                                        {% assign color = t[1] %}
+                                    {% else %}
+                                        {% assign color = tag | remove: 'color_' | handleize %} 
+                                    {% endif %}
+                                    <li class="js-color colors__item" data-color="{{ tag }}" style="background-color:{{ color }};">{{ 'check.svg' | asset_url | img_tag }}{{ tag | remove: 'color_' }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if category.size > 1 %}
+                        <div class="category js-categories collection__filter__row">
+                            <p class="collection__filter__title">Kategori</p>
+                            <ul class="category__wrapper">
+                                {% for tag in category %}
+                                    <li class="category__item js-category" data-category="{{ tag }}"><span class="checkbox">{{ 'check.svg' | asset_url | img_tag }}</span> {{ tag | remove: 'category_' }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if collection.all_vendors.size > 1 %}
+                        <div class="vendor js-vendors collection__filter__row category">
+                            <p class="collection__filter__title">Brand</p>
+                            <ul class="vendor__wrapper category__wrapper">
+                                {% for vendor in collection.all_vendors %}
+                                    <li class="vendor__item category__item js-vendor" data-vendor="{{ vendor }}"><span class="checkbox">{{ 'check.svg' | asset_url | img_tag }}</span> {{ vendor }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </aside>
+            {% endif %}
+            <main class="collection__inner js-products">
+                {% for product in collection.products %}
+                    {% include 'product-item' %}
+                {% endfor %}
+                {% if paginate.pages > 1 %}
+                    {% include 'ajax-pagination' %}
+                {% endif %}
+            </main>
+        </section>
+    </div>
+
+{% endpaginate %}

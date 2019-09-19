@@ -1,0 +1,154 @@
+.hero{
+    &--blocks{
+        display: flex;
+        flex-flow: row wrap;
+
+        &__item{
+            width: 50%;
+            height: 64rem;
+
+            position: relative;
+
+            &__img{
+                display: flex;
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                img{
+                    @include fill;
+                }
+
+                &:before{
+                    content: "";
+                    position: absolute;
+
+                    z-index: 1;
+
+                    top: 0;
+                    left: 0;
+
+                    width: 100%;
+                    height: 100%;
+
+                    background: linear-gradient(rgba(#000, .2), rgba(#000, .6));
+                }
+            }
+
+            &__link{
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                width: 100%;
+                height: 100%;
+
+                z-index: 4;
+            }
+
+            &__inner{
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+
+                width: 100%;
+                height: 100%;
+
+                position: relative;
+                z-index: 6;
+
+                padding: 12rem;
+
+                text-align: center;
+                color: $white;
+
+                pointer-events: none;
+
+                .btn{
+                    @extend %btn;
+
+                    margin-top: 3rem;
+
+                    color: $black;
+                    background: $white;
+
+                    transition: .3s $ease all;
+                    transition-property: background, color;
+
+                    pointer-events: auto;
+
+                    position: relative;
+
+                    &:hover{
+                        color: $white;
+                        background: $black;
+                    }
+                }
+            }
+        }
+    }
+
+    &--collection{
+        position: relative;
+        z-index: 1;
+
+        padding: 15rem 0;
+
+        &.row--no-gap{
+            margin: 5rem auto;
+        }
+
+        &__img{
+            position: absolute;
+            top:0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+            &:before{
+                content: "";
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                z-index: 3;
+
+                background: linear-gradient(rgba(#000, .3), rgba(#000, .6));
+
+                display: none;
+            }
+
+            &--overlay{
+                &:before{
+                    display: block;
+                }
+            }
+
+            img{
+                @include fill;
+            }
+        }
+
+        &__inner{
+            display: flex;
+            flex-flow: column;
+            color: $white;
+            text-align: center;
+
+            h1{
+                font-size: 4.2rem;
+                line-height: 1.2;
+                font-weight: 600;
+            }
+        }
+    }
+}

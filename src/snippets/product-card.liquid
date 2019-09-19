@@ -1,0 +1,9 @@
+{%- assign p = product -%}
+<div class="product-item">
+    <figure class="product-item__img">
+        {% include 'image' with img: p.featured_image, sizing: '600' %}
+    </figure>
+    <h6 class="product-item__title">{{ p.title }}</h6>
+    <div class="product-item__prices">{% include 'product-prices' %}</div>
+    <a href="{{ p.url }}" class="product-item__link"></a>
+</div>

@@ -1,0 +1,26 @@
+{% assign hasTag = false %}
+
+{% for tag in product.tags %}
+    {% if tag contains 'spec_' %}
+        {% assign hasTag = true %}
+        {% break %}
+    {% else %}
+        {% continue %}
+    {% endif %}
+{% endfor %}
+
+{% if hasTag %}
+    <section class="product__specs">
+        <ul class="product__specs__wrapper">
+            {% for tag in product.tags %}
+                {% if tag contains 'spec_' %}
+                    {% assign spec = tag | remove: 'spec_' | split: '_' %}
+                    <li class="product__specs__item">
+                        <p class="title">{{ spec[0] }}</p>
+                        <p class="value">{{ spec[1] }}</p>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}

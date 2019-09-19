@@ -1,0 +1,37 @@
+<ul class="payment-icons">
+    {% if settings.apple-pay %}
+        <li class="payment-icons__icon">
+            {{ 'apple-pay.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+    {% if settings.dankort %}
+        <li class="payment-icons__icon">
+            {{ 'dankort.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+    {% if settings.maestro %}
+        <li class="payment-icons__icon">
+            {{ 'maestro.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+    {% if settings.mastercard %}
+        <li class="payment-icons__icon">
+            {{ 'mastercard.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+    {% if settings.mobile-pay %}
+        <li class="payment-icons__icon">
+            {{ 'mobile-pay.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+    {% if settings.visa-electron %}
+        <li class="payment-icons__icon">
+            {{ 'visa-electron.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+    {% if settings.visa %}
+        <li class="payment-icons__icon">
+            {{ 'visa.png' | asset_url | img_tag }}
+        </li>
+    {% endif %}
+</ul>

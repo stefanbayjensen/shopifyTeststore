@@ -1,0 +1,47 @@
+{% assign s = section.settings %}
+<header class="row-hero row--no-gap hero--collection container">
+
+    <div class="hero--collection__img{% if s.overlay %} hero--collection__img--overlay{% endif %}">
+        {% if collection.handle == 'all' or collection.image == blank %}
+            {% assign image = s.img %}
+        {% else %}
+            {% assign image = collection.image %}
+        {% endif %}
+
+        {%
+            include 'image' with
+            img: image
+        %}
+    </div>
+
+    <article class="hero--collection__inner">
+        <h1>{%- if collection.handle == 'all' -%}
+                {{ s.title }}
+            {%- else -%}
+                {{ collection.title }}
+        {%- endif -%}</h1>
+    </article>
+</header>
+{% schema %}
+    {
+        "name": "Hero",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "img",
+                "label": "Choose an image"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "checkbox",
+                "id": "overlay",
+                "label": "Show overlay?",
+                "default": true
+            }
+        ]
+    }
+{% endschema %}

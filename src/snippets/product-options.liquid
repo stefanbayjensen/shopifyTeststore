@@ -1,0 +1,76 @@
+{%- assign curVariant = product.selected_or_first_available_variant -%}
+
+{% if type == blank %}
+  {%- assign type = 'select' -%}
+{% endif %}
+{% if class == blank %}
+  {%- assign class = 'product-options' -%}
+{% endif %}
+
+<div class="{{ class }}">
+    {% unless product.has_only_default_variant %}
+        {% case type %}
+          {% when 'select' %}
+            <div class="{{ class }}__wrapper {{ class }}__wrapper--select">
+              {% for option in product.options_with_values %}
+                <div class="{{ class }}__item">
+                  {%- capture options -%}
+                    {% for value in option.values %}
+                      <option value="{{ value | escape }}" {%- if option.selected_value == value -%}
+                        selected
+                      {%- endif -%}>{{ value }}</option>
+                    {% endfor %}
+                  {%- endcapture -%}
+                  {%- capture attributes -%}
+                    data-option-select
+                    data-index='{{ forloop.index0 }}'
+                  {%- endcapture -%}
+                  {%
+                    include 'component-select' with
+                    label: option.name,
+                    name: option.name,
+                    attributes: attributes
+                    options: options
+                  %}
+                </div>
+              {% endfor %}
+            </div>
+          {% when 'radio' %}
+            <div class="{{ class }}__wrapper {{class}}__wrapper--radio">
+              {% for option in product.options_with_values %}
+                <div class="{{ class }}__item">
+                    <label>{{ option.name }}</label>
+                    <div class="{{ class }}__group" data-option-radio data-index={{ forloop.index0 }}>
+                        {% for value in option.values %}
+                            {% assign idName = value | append: '-' | append: option.name %}
+                            {%
+                              include 'component-radio' with
+                              label: value,
+                              value: value,
+                              name: option.name,
+                              id: idName
+                            %}
+                        {% endfor %}
+                    </div>
+                </div>
+              {% endfor %}
+            </div>
+        {% endcase %}
+    {% endunless %}
+
+    {%- capture options -%}
+        {% for variant in product.variants %}
+            <option value='{{ variant.id }}' {% if variant.id == curVariant.id %} selected {% endif %} {% unless variant.available %} disabled {% endunless %}>{{ variant.title }}</option>
+        {% endfor %}
+    {%- endcapture -%}
+
+    {%
+    include 'component-select' with
+    name: 'id'
+    options: options
+    className: 'js-variant'
+    required: true
+    attributes: 'data-option-main',
+    value: curVariant.id
+  %}
+</div>

@@ -1,0 +1,14 @@
+{% if id == blank %}
+    {% assign id = label %}
+{% endif %}
+
+<label class='radio' for={{id}}>
+    <input id={{id}} type="radio" name={{name}} value={{value}} {{ attributes }} {% if option.selected_value == value %} checked {% endif %}/>
+    <span>{{label}}</span>
+</label>
+
+{% assign label = blank %}
+{% assign name = blank %}
+{% assign value = blank %}
+{% assign attributes = blank %}
+{% assign checked = blank %}

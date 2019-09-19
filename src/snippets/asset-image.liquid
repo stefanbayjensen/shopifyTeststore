@@ -1,0 +1,22 @@
+{% if sizing == blank %}{% assign sizing = 2048 %}{% endif %}
+{% if lazySize == blank %}{% assign lazySize = '1x1' %}{% endif %}
+{% if remove == blank %}{% assign remove = blank %}{% else %}{% endif %}
+{%- assign img_url = img | asset_img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+{% assign newSizing = sizing | times: '1.25' | round %}
+{% assign sizes = "180,360,540,720,900,1080,1296,1512,1728,2048" | split: ','  %}
+{% for size in sizes %}
+    {% assign numberSize = size | plus: 0 %}
+    {% if newSizing >= numberSize and forloop.index == 1 %}
+        {% assign availableSizes = size %}
+    {% elsif newSizing >= numberSize %}
+        {% capture availableSizes %}{{ availableSizes }}, {{ size }}{% endcapture %}
+    {% endif %}
+{% endfor %}
+<img id="Image-{{ img.id }}-{{ responsive_image_counter }}"
+class="responsive-image__image lazyload"
+src="{{ img | asset_img_url: lazySize }}"
+data-src="{{ img_url }}"
+data-widths="[{{ availableSizes }}]"
+data-aspectratio="{{ img.aspect_ratio }}"
+data-sizes="auto"
+alt="{{ img.alt | remove: remove | escape }}">

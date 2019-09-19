@@ -1,0 +1,12 @@
+<section class="ajax-pagination js-ajaxPagination">
+    <div class="ajax-pagination__progress">
+        {% assign currentNumber = paginate.current_offset | plus: paginate.page_size %}
+        {% assign total = paginate.items | append: '.00' %}
+
+        <p class="ajax-pagination__progress__title">Du har set {{ currentNumber }} ud af {{ paginate.items }}</p>
+        <div class="ajax-pagination__progress__bar" style="width:{{ currentNumber | divided_by: total | times: 100 }}%;"></div>
+    </div>
+    {% if paginate.next.is_link %}
+        <a href="{{ paginate.next.url }}" id="#more" class="js-ajaxNext ajax-pagination__btn">Indlæs flere</a>
+    {% endif %}
+</section>

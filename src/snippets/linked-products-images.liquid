@@ -1,0 +1,22 @@
+{% assign linkedTag = false %}
+{%- for tag in product.tags -%}
+    {%- if tag contains 'linked_' -%}
+        {% assign linkedTag = tag | remove: 'linked_' | handleize %}
+        {% break %}
+    {%- else -%}
+        {%- continue -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{% if linkedTag %}
+    {%- for p in collections[linkedTag].products -%}
+        {% capture attr %}data-product="{{ p.id }}"{% endcapture %}
+        {% 
+            include 'image', 
+            img: p.images[1],
+            sizing: '720',
+            class: 'product-item__image--linked js-linked-img',
+            attributes: attr
+        %}
+    {%- endfor -%}
+{% endif %}

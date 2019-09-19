@@ -1,0 +1,7 @@
+{% if product.variants.size > 1 %}
+    <ul class="product-item__options">
+        {% for var in product.variants %}
+            <li class="product-item__options__item js-size" data-product="{{ var.id }}"><p>{{ var.title }}</p></li>
+        {% endfor %}
+    </ul>
+{% endif %}

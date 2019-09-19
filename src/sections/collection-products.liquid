@@ -1,0 +1,33 @@
+{%- assign s = section.settings -%}
+<section class="products row-products row container">
+    <h2 class="_sectionTitle">{{ s.title }}</h2>
+    <ul class="products__wrapper">
+        {% for p in collections[s.collection].products limit:8 %}
+            {% include 'product-item' with product: p %}
+        {% endfor %}
+    </ul>
+</section>
+
+{% schema %}
+    {
+        "name": "Collection w. products",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "collection",
+                "id": "collection",
+                "label": "Choose a collection"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Collection w. products",
+                "category": "Layout"
+            }
+        ]
+    }
+{% endschema %}

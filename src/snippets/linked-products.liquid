@@ -1,0 +1,26 @@
+{% assign linkedTag = false %}
+{%- for tag in product.tags -%}
+    {%- if tag contains 'linked_' -%}
+        {% assign linkedTag = tag | remove: 'linked_' | handleize %}
+        {% break %}
+    {%- else -%}
+        {%- continue -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{% if linkedTag %}
+    <div class="linked-products">
+        <ul class="linked-products__wrapper">
+            {%- for p in collections[linkedTag].products -%}
+                <li class="linked-products__item js-linked{% if product.handle == p.handle %} linked-products__item--active{% endif %}" data-product="{{ p.id }}">
+                    {% 
+                        include 'image', 
+                        img: p.featured_image,
+                        sizing: '200' 
+                    %}
+                    <a href="{{ p.url }}" class="linked-products__item__link"></a>
+                </li>
+            {%- endfor -%}
+        </ul>
+    </div>
+{% endif %}

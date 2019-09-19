@@ -1,0 +1,65 @@
+html {
+    margin: 0 !important;
+    font-size: 10px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: $font-family;
+    line-height: inherit;
+}
+
+#preview-bar-iframe,
+.none {
+    display: none !important;
+}
+
+.container {
+	width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &--small {
+        max-width: 900px;
+        width: 80%;
+    }
+
+	&--full {
+		margin-left: calc( -100vw / 2 + 100% / 2 );
+        margin-right: calc( -100vw / 2 + 100% / 2 );
+        max-width: 100vw;
+		width: 100vw;
+	}
+
+}
+
+img {
+    max-width: 100%;
+    align-self: flex-start;
+
+    opacity: 1;
+
+    transition: .3s $ease opacity;
+
+    &.lazyload{
+        opacity: 0;
+    }
+}
+
+
+.js-variant{
+    display: none !important;
+    visibility: hidden;
+}
+
+.shopify-section{
+    overflow: hidden;
+}

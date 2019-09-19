@@ -1,0 +1,21 @@
+{%- assign itemActive = itemClass | append: '--active' -%}
+{% if hasBlocks != blank %}
+    {%- assign blocks = true -%}
+{% endif %}
+
+<ul class="linklist {{ wrapperClass }}">
+    {% for l in linklists[menu].links %}
+            <li class="linklist__item {{ itemClass }}{% if l.active or l.child_current %} linklist__item--active {{ itemActive }}{% endif %} {% if l.title contains 'c_' %} linklist__item--cta {{ itemClass }}--cta{% endif %}" >
+                <a href="{{ l.url }}" class="linklist__link link">{{ l.title | remove: 'c_' }}</a>
+                {% if l.links.size > 0 %}
+                    <ul class="submenu">
+                        {% for cl in l.links %}
+                            <li class="submenu__item">
+                                <a href="{{ cl.url }}" class="submenu__link">{{ cl.title | remove: 'c_' }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+    {% endfor %}
+</ul>

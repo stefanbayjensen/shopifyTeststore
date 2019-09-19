@@ -1,0 +1,83 @@
+<footer class="site-footer">
+    {% for b in section.blocks %}
+        {%- assign s = b.settings -%}
+
+        {% case b.type %}
+
+            {% when 'link_list' %}
+                <div class="site-footer__col site-footer__col--menu">
+                    <h4 class="site-footer__title">
+                        {%- if s.title != blank -%}
+                            {{ s.title }}
+                        {%- elsif s.menu != blank -%}
+                            {{ linklists[s.menu].title }}
+                        {%- endif -%}
+                    </h4>
+
+                    {% if s.menu != blank %}
+                        {% 
+                            include 'navigation' with
+                            menu: s.menu 
+                        %}
+                    {% endif %}
+                </div>
+
+            {% when 'text' %}
+                <div class="site-footer__col site-footer__col--text">
+                    {% if s.logo != blank %}
+                        <div class="img">{{ s.logo | file_url | img_tag }}</div>
+                    {% endif %}
+
+                    {% if s.desc != blank %}
+                        <article class="rte">{{ s.desc }}</article>
+                    {% endif %}
+                </div>
+                
+        {% endcase %}
+
+    {% endfor %}
+</footer>
+
+{% schema %}
+    {
+        "name": "Footer",
+        "blocks": [
+            {
+                "name": "Menu",
+                "type": "link_list",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title",
+                        "info": "Leave blank if you just want to use the menu title"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "menu",
+                        "label": "Menu",
+                        "info": "Choose the menu you want to show"
+                    }
+                ]
+            },
+            {
+                "name": "Text",
+                "type": "text",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "logo",
+                        "label": "Image",
+                        "info": "If you want to show an image, type the file name. Images are uploaded through [files](/admin/settings/files)",
+                        "placeholder": "logo.svg"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "desc",
+                        "label": "Text"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

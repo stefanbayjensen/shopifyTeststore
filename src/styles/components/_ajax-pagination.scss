@@ -1,0 +1,17 @@
+.ajax-pagination{
+    &__progress{
+        display: flex;
+        flex-flow: column;
+
+        position: relative;
+
+        &__bar{
+            background: $cta;
+            height: 3px;
+        }
+    }
+
+    &__btn{
+        @extend %btn;
+    }
+}
