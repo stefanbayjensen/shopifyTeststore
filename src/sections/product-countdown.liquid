@@ -1,0 +1,19 @@
+{% assign s = section.settings %}
+
+<section class="product__countdown" data-component="productCountdown">
+    <p class="text">Hvis du bestiller nu, sender vi din ordre om <span class="js-countdown countdown" data-time="{{ s.time }}"><span class="hours">0</span>, <span class="minutes">0</span> og <span class="seconds">0</span></span></p>
+</section>
+
+{% schema %}
+    {
+        "name": "Countdown timer",
+        "settings": [
+            {
+                "type": "text",
+                "id": "time",
+                "label": "At what time do you send your orders?",
+                "info": "Type the exact hour, where you send your orders ex. 16:00"
+            }
+        ]
+    }
+{% endschema %}

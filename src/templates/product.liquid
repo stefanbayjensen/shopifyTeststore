@@ -46,6 +46,7 @@
                     {% include 'specs' with product: p %}
                     <div class="quantity">{% include 'component-counter' with product: p, max: 5 %}</div>
                     <button type="submit" class="add-to-cart">{{ 'products.product.add_to_cart' | t }}</button>
+                    {% section 'product-countdown' %}
                 </form>
             </article>
             <aside class="product__info__sidebar">

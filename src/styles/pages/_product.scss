@@ -4,6 +4,8 @@
     &__inner{
         display: flex;
         align-items: flex-start;
+
+        margin-bottom: 7.5rem;
     }
 
     &__slider{
@@ -96,10 +98,6 @@
             }
         }
 
-        .linked-products{
-            margin-top: 3rem;
-        }
-        
         .linked-products__item{
             width: 6.4rem;
 
@@ -148,6 +146,8 @@
     &__prices{
         display: flex;
         align-items: center;
+
+        margin-bottom: 3.2rem;
 
         .price{
             font-size: 1.6rem;
@@ -227,6 +227,33 @@
                 font-weight: 500;
                 flex: 1 0;
                 text-align: left;
+            }
+        }
+    }
+
+    &__countdown{
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        align-items: center;
+
+        font-size: 1.2rem;
+        line-height: 1.5;
+
+        max-width: 30rem;
+        margin: 1.6rem auto 0 auto;
+
+        > p{
+            color: lighten(#000, 30%);
+        }
+        
+
+        .countdown{
+            font-weight: 600;
+            color: $black;
+
+            > span{
+                white-space: nowrap;
             }
         }
     }

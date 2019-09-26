@@ -12,6 +12,7 @@ import productSlider from '@/components/product-slider.js'
 import collection from '@/components/collection.js'
 import recentlyViewed from '@/components/recently-viewed.js'
 import productPageSlider from '@/components/product-page-slider.js'
+import productCountdown from '@/components/product-countdown.js'
 
 const state = {
     cartOpen: false,
@@ -29,7 +30,8 @@ const components = {
     productSlider,
     collection,
     recentlyViewed,
-    productPageSlider
+    productPageSlider,
+    productCountdown
 }
 
 export default picoapp(components, state)
