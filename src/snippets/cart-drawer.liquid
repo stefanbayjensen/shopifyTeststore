@@ -1,0 +1,19 @@
+<section class="cart-drawer" data-component="cartDrawer">
+    <div class="cart-drawer__overlay js-overlay"></div>
+    <div class="cart-drawer__inner js-drawer">
+        <header class="cart-drawer__header">
+            <h6 class="cart-drawer__header__title">{{ 'cart.general.title' | t }}</h6>
+            <button class="cart-drawer__header__close js-close">{{ 'close.svg' | asset_url | img_tag }}</button>
+        </header>
+        <ul class="cart-drawer__wrapper js-items">
+            
+        </ul>
+        <footer class="cart-drawer__footer">
+            <ul class="cart-drawer__footer__pricing">
+                <li><strong>Subtotal</strong><span class="js-subtotal">0</span></li>
+                <li><strong>Forsendelse</strong>Gratis</li>
+                <li><strong>Total</strong><span class="js-total">0</span></li>
+            </ul>
+        </footer>
+    </div>
+</section>

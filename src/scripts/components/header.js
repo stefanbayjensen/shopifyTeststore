@@ -17,21 +17,6 @@ export default component((node, ctx) => {
         } else {
             node.classList.remove('site-header--fixed')
         }
-
-        /*if( offset < lastOffset && offset >= headerHeight ){
-            node.classList.remove('site-header--fixed')
-            void node.offsetWidth
-            node.classList.add('site-header--fixedFull')
-        } else if( offset >= lastOffset && offset >= headerHeight ) {
-            node.classList.remove('site-header--fixedFull')
-            void node.offsetWidth
-            node.classList.add('site-header--fixed')
-        } else {
-            node.classList.remove('site-header--fixedFull')
-            node.classList.remove('site-header--fixed')
-        }
-
-        lastOffset = offset*/ 
     }
 
     fixedHeader()
@@ -52,4 +37,14 @@ export default component((node, ctx) => {
     })
 
     cartCount.innerHTML = ctx.getState().cart.item_count
+
+
+    cartIcon.addEventListener('click', e => {
+        e.preventDefault()
+        ctx.emit('cart:toggle', (state) => {
+            return {
+                cartOpen: !state.cartOpen,
+            }
+        })
+    })
 })

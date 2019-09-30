@@ -17,7 +17,8 @@ export function countdown(endDate, node) {
       let curTimeremaining = parseInt((endDate - startDate) / 1000)
 
       if( curTimeremaining <= 0 ){
-        endDate = new Date(new Date().setDate(new Date().getDate() + 1)).getTime()
+        curEndDate.setDate(new Date().getDate() + 1)
+        endDate = curEndDate
       }
 
       let timeRemaining = parseInt((endDate - startDate) / 1000)

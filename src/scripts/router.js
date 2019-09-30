@@ -15,6 +15,7 @@ const router = operator('#root', [{
     ignore: true
   },
   () => new Promise(res => {
+    document.body.classList.remove('is-visible')
     document.body.classList.add('is-transitioning')
     setTimeout(res, 300)
     setTimeout(() => {

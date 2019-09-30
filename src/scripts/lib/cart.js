@@ -63,9 +63,9 @@ export function addItemById(id, quantity) {
                 return fetchCart().then((cart) => {
                     app.hydrate({ cart: cart })
                     app.emit('cart:updated')
-                    // app.emit('updated', { item, cart })
+                    app.emit('updated', { item, cart })
                     return { item, cart }
-                }).then( cartSuccess(item) )
+                })
             }
         })
 }

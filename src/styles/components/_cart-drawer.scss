@@ -1,0 +1,263 @@
+body{
+    transition: .7s $ease right;
+    position: relative;
+    right: 0;
+
+    &.is-visible{
+        right: 16%;
+    }
+
+    &.is-transitioning{
+        transition: 0s .3s;
+    }
+}
+
+.cart-drawer{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1001;
+
+    pointer-events: none;
+
+    &.is-visible{
+        pointer-events: auto;
+    }
+
+    &__overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: rgba(#000, .2);
+
+        z-index: -1;
+
+        opacity: 0;
+
+        transition: .3s $ease opacity;
+
+        .is-visible &{
+            opacity: 1;
+        }
+    }
+
+    &__inner{
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 100%;
+        max-width: 50rem;
+        height: 100%;
+        max-height: 100vh;
+
+        overflow: auto;
+
+        box-shadow: -1.2rem 0 6.4rem -1rem rgba(#000, .16);
+        background: $white;
+
+        padding: 5rem;
+
+        transform: translateX(calc(100% + 6.4rem));
+
+        transition: .7s $ease transform;
+
+        .is-visible &{
+            transform: translateX(0);
+        }
+    }
+
+    &__header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &__title{
+            font-size: 2rem;
+            line-height: 1.5;
+
+            font-weight: 400;
+            color: $black;
+        }
+
+        &__close{
+            @include appearance;
+            font-size: 2.4rem;
+            width: 1em;
+            height: 1em;
+
+            border: 0;
+            padding: 0;
+
+            display: flex;
+
+            background: none;
+            opacity: .5;
+
+            cursor: pointer;
+
+            > img{
+                width: 100%;
+                height: auto;
+
+                margin: auto;
+            }
+        }
+    }
+
+    &__wrapper{
+        display: flex;
+        flex-flow: column;
+
+        margin: 5rem 0 3rem 0;
+    }
+
+    &__item{
+        display: flex;
+        position: relative;
+        width: 100%;
+        margin-top: 3rem;
+
+        &:first-child{
+            margin-top: 0;
+        }
+
+        &__img{
+            width: 9rem;
+            height: auto;
+            display: block;
+            margin-right: 2rem;
+        }
+
+        &__inner{
+            display: flex;
+            flex-flow: column;
+
+            padding-right: 5rem;
+            font-size: 1.6rem;
+        }
+
+        &__title{
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        &__price{
+            margin-top: .1em;
+            font-size: 1em;
+            color: lighten(#000, 50%);
+        }
+
+        &__quantity{
+            margin-top: 1rem;
+            position: relative;
+            z-index: 5;
+
+            display: flex;
+
+            .quantity{
+                font-size: 1.2rem;
+                color: $black;
+                font-weight: 500;
+
+                width: 3.2rem;
+                height: 3.2rem;
+
+                border: solid 1px darken(#fff, 18%);
+                cursor: pointer;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:nth-child(2){
+                    margin: 0 -1px;
+                }
+            }
+        }
+
+        &__remove{
+            @include appearance;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            background: none;
+            border: 0;
+            padding: 0;
+            line-height: 1.5;
+
+            @extend %btn-underline;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 0;
+
+            z-index: 5;
+
+            &:after{
+                height: 1px;
+            }
+        }
+
+        &__link{
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: 1;
+        }
+    }
+
+    &__footer{
+        display: flex;
+        flex-flow: column;
+
+        &__pricing{
+            border-top: solid 1px darken(#fff, 12%);
+            padding-top: 2rem;
+
+            > li{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: lighten(#000, 30%);
+
+                margin-top: 1em;
+
+                &:first-child{
+                    margin-top: 0;
+                }
+
+                &:last-child{
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    color: $black;
+                }
+
+                strong{
+                    font-weight: inherit;
+                }
+            }
+        }
+    }
+}
