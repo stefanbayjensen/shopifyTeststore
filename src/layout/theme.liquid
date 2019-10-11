@@ -32,6 +32,8 @@
 
         {% include 'css-variables' %}
 
+        {% assign shopSymbol = cart.currency.symbol | remove: '.' %}
+
         <script>
             window.theme = {
               strings: {
@@ -42,7 +44,8 @@
                 cartItemRemove: "{{ 'cart.general.remove' | t }}",
                 cartAddSuccess: "{{ 'products.product.success_to_cart' | t }}",
               },
-              moneyFormat: "{{ shop.money_format }}"
+              moneyFormat: "{{ shop.money_format }}",
+              decimalSeperator: "{{ 100 | money | remove: shopSymbol | remove: '1' | remove: '0' | strip }}"
             }
         </script>
 
