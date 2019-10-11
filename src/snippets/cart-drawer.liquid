@@ -1,6 +1,6 @@
 <section class="cart-drawer" data-component="cartDrawer">
     <div class="cart-drawer__overlay js-overlay"></div>
-    <div class="cart-drawer__inner js-drawer">
+    <form method="post" action="/cart" class="cart-drawer__inner js-drawer">
         <header class="cart-drawer__header">
             <h6 class="cart-drawer__header__title">{{ 'cart.general.title' | t }}</h6>
             <button class="cart-drawer__header__close js-close">{{ 'close.svg' | asset_url | img_tag }}</button>
@@ -14,6 +14,9 @@
                 <li><strong>Forsendelse</strong>Gratis</li>
                 <li><strong>Total</strong><span class="js-total">0</span></li>
             </ul>
+
+            <label for="js-terms cart-drawer__footer__terms"><input type="checkbox" id="js-terms"><span class="cart-drawer__footer__terms__checkbox">{{ 'check.svg' | asset_url | img_tag }}</span><p class="cart-drawer__footer__terms__text">Accept our terms and conditions</p></label>
+            <button class="cart-drawer__footer__cta js-submit" name="checkout" type="submit" id="checkout">{{ 'cart.general.checkout' | t }}</button>
         </footer>
-    </div>
+    </form>
 </section>

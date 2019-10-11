@@ -17,10 +17,10 @@ const router = operator('#root', [{
   () => new Promise(res => {
     document.body.classList.remove('is-visible')
     document.body.classList.add('is-transitioning')
-    setTimeout(res, 300)
+    setTimeout(res, 500)
     setTimeout(() => {
       document.body.classList.remove('is-transitioning')
-    }, 400)
+    }, 600)
   })
 ])
 

@@ -5,9 +5,9 @@
 {% endif %}
     
 {% if product.compare_at_price > product.price %}
-    <p class="price--old"{% if data-object %} data-price{% endif %}>{{ product.compare_at_price | money }}</p>
-    <p class="price"{% if data-object %} data-compare-price{% endif %}>{{ product.price | money }}</p>
-{% else %}
+    <p class="price--old"{% if data-object %} data-compare-price{% endif %}>{{ product.compare_at_price | money }}</p>
     <p class="price"{% if data-object %} data-price{% endif %}>{{ product.price | money }}</p>
-    <p class="price"{% if data-object %} data-compare-price{% endif %}></p>
+{% else %}
+    <p class="price--old"{% if data-object %} data-compare-price{% endif %}></p>
+    <p class="price"{% if data-object %} data-price{% endif %}>{{ product.price | money }}</p>
 {% endif %}

@@ -5,6 +5,8 @@ export default function(variant){
           productCompareAtPrice = document.querySelector('*[data-compare-price]')
 
     productPrice.innerHTML = formatMoney(variant.price, theme.moneyFormat)
+
+    console.log(variant)
     
     if( variant.compare_at_price == null ){
       productCompareAtPrice.innerHTML = ''

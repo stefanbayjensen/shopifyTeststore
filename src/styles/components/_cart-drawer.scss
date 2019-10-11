@@ -1,5 +1,5 @@
 body{
-    transition: .7s $ease right;
+    transition: .7s $ease right, .5s $ease top;
     position: relative;
     right: 0;
 
@@ -8,7 +8,7 @@ body{
     }
 
     &.is-transitioning{
-        transition: 0s .3s;
+        transition: 0s .5s;
     }
 }
 
@@ -258,6 +258,43 @@ body{
                     font-weight: inherit;
                 }
             }
+        }
+
+        &__terms{
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            > input{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 0;
+
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            &__checkbox{
+                width: 1em;
+                height: 1em;
+
+                background: red;
+
+                input:checked + &{
+                    background: blue;
+                }
+            }
+        }
+
+        &__cta{
+            @include appearance;
+            @extend %btn;
+            border: 0;
+
+            text-align: center;
+            background: $cta;
         }
     }
 }
