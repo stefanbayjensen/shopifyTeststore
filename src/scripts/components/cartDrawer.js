@@ -57,6 +57,8 @@ export default component((node, ctx) => {
     const total = node.querySelector('.js-total')
     const itemsRoot = node.querySelector('.js-items')
     const loading = itemsRoot.innerHTML
+    const drawer = node.querySelector('.js-drawer')
+    const terms = node.querySelector('#js-terms')
 
     const render = (cart) => {
         itemsRoot.innerHTML = renderItems(cart.items)
@@ -100,5 +102,12 @@ export default component((node, ctx) => {
             }
         })
         app.mount()
+    })
+
+    drawer.addEventListener('submit', e => {
+        if( !terms.checked ){
+            e.preventDefault()
+            popup.classList.toggle('open')
+        }        
     })
 })
