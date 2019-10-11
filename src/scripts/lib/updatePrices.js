@@ -4,7 +4,7 @@ export default function(variant){
     const productPrice = document.querySelector('*[data-price]'),
           productCompareAtPrice = document.querySelector('*[data-compare-price]')
 
-    productPrice.innerHTML = formatMoney(variant.price, theme.moneyFormat)
+    productPrice.innerHTML = formatMoney(variant.price)
 
     console.log(variant)
     

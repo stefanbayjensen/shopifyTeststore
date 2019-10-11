@@ -30,8 +30,9 @@ export function formatMoney(cents, format = theme.moneyFormat) {
         if( typeof precision == 'undefined' ){
             precision = 2
         }
-        thousands = thousands || '.'
-        decimal = decimal || ','
+        
+        decimal = theme.decimalSeperator
+        thousands = (decimal == ',') ? '.' : ','
 
         if (isNaN(number) || number == null) {
             return 0

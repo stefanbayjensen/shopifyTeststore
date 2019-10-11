@@ -1,6 +1,4 @@
 import { component } from 'picoapp'
-import { formatMoney } from '@/lib/currency.js'
-import { getSizedImageUrl, imageSize } from '@/lib/images.js'
 
 let output = ''
 let outputHTML = ''
@@ -128,6 +126,9 @@ function fetchProducts(){
             let vendorMatches = []
 
             products.forEach( product => {
+
+                console.log(product)
+
                 product.tags.forEach(tag => {
                     if (colorTags.includes(tag)) {
                         colorMatches.push(product.handle)
